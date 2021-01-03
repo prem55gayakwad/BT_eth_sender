@@ -29,8 +29,12 @@ extern "C" {
 #define LED1_PIN     22U
 #define LED2_PORT    PTE
 #define LED2_PIN     23U
+#define UART_RX_PORT    PTC
+#define UART_RX_PIN     6U
+#define UART_TX_PORT    PTC
+#define UART_TX_PIN     7U
 /*! @brief User number of configured pins */
-#define NUM_OF_CONFIGURED_PINS0 25
+#define NUM_OF_CONFIGURED_PINS0 27
 /*! @brief User configuration structure */
 extern pin_settings_config_t g_pin_mux_InitConfigArr0[NUM_OF_CONFIGURED_PINS0];
 

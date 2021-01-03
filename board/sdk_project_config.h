@@ -18,11 +18,11 @@
 /* Include header files for all configured components */
 #include "clock_config.h"
 #include "pin_mux.h"
+#include "peripherals_edma_config_1.h"
 #include "peripherals_enet_config_1.h"
+#include "peripherals_lpuart_1.h"
 #include "peripherals_osif_1.h"
 #include "peripherals_phy_1.h"
-#include "peripherals_lpuart_1.h"
-#include "peripherals_edma_config_1.h"
 
 
 #endif /* SDK_PROJECT_CONFIG_H_ */

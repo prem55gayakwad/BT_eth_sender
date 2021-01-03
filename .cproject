@@ -369,7 +369,7 @@
 		<COND_TOOLCHAIN_DEFINES>ENET_TXBD_NUM=2;ENET_RXBD_NUM=6;</COND_TOOLCHAIN_DEFINES>
 	</storageModule>
 	<storageModule moduleId="com.nxp.s32ds.cle.uct.internal.core.toolchainScriptProfile">
-		<COND_TOOLCHAIN_COMPONENTS_OPTION>platform.driver.osif;platform.driver.osif_baremetal;platform.driver.enet;platform.driver.phy;platform.driver.lpuart;platform.driver.edma;</COND_TOOLCHAIN_COMPONENTS_OPTION>
+		<COND_TOOLCHAIN_COMPONENTS_OPTION>platform.driver.osif;platform.driver.osif_baremetal;platform.driver.edma;platform.driver.enet;platform.driver.lpuart;platform.driver.phy;</COND_TOOLCHAIN_COMPONENTS_OPTION>
 	</storageModule>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>

@@ -11,6 +11,8 @@ pin_labels:
 - {pin_num: '128', pin_signal: PTE21, label: LED0, identifier: LED0}
 - {pin_num: '129', pin_signal: PTE22, label: LED1, identifier: LED1}
 - {pin_num: '131', pin_signal: PTE23, label: LED2, identifier: LED2}
+- {pin_num: '117', pin_signal: PTC7, label: UART_TX, identifier: UART_TX}
+- {pin_num: '118', pin_signal: PTC6, label: UART_RX, identifier: UART_RX}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
@@ -65,6 +67,8 @@ BOARD_InitPins:
   - {pin_num: '46', peripheral: ENET, signal: 'txd_mii, 3', pin_signal: PTD5}
   - {pin_num: '47', peripheral: ENET, signal: txen, pin_signal: PTD12}
   - {pin_num: '42', peripheral: ENET, signal: txer, pin_signal: PTC3}
+  - {pin_num: '118', peripheral: LPUART1, signal: rxd, pin_signal: PTC6}
+  - {pin_num: '117', peripheral: LPUART1, signal: txd, pin_signal: PTC7, direction: OUTPUT}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
@@ -195,6 +199,32 @@ pin_settings_config_t g_pin_mux_InitConfigArr0[NUM_OF_CONFIGURED_PINS0] = {
         .driveSelect     = PORT_LOW_DRIVE_STRENGTH,
         .passiveFilter   = false,
         .mux             = PORT_MUX_ALT5,
+        .pinLock         = false,
+        .intConfig       = PORT_DMA_INT_DISABLED,
+        .clearIntFlag    = false,
+        .gpioBase        = NULL,
+        .digitalFilter   = false,
+    },
+    {
+        .base            = PORTC,
+        .pinPortIdx      = 6U,
+        .pullConfig      = PORT_INTERNAL_PULL_NOT_ENABLED,
+        .driveSelect     = PORT_LOW_DRIVE_STRENGTH,
+        .passiveFilter   = false,
+        .mux             = PORT_MUX_ALT2,
+        .pinLock         = false,
+        .intConfig       = PORT_DMA_INT_DISABLED,
+        .clearIntFlag    = false,
+        .gpioBase        = NULL,
+        .digitalFilter   = false,
+    },
+    {
+        .base            = PORTC,
+        .pinPortIdx      = 7U,
+        .pullConfig      = PORT_INTERNAL_PULL_NOT_ENABLED,
+        .driveSelect     = PORT_LOW_DRIVE_STRENGTH,
+        .passiveFilter   = false,
+        .mux             = PORT_MUX_ALT2,
         .pinLock         = false,
         .intConfig       = PORT_DMA_INT_DISABLED,
         .clearIntFlag    = false,
