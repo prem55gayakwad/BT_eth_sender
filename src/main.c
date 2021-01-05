@@ -1,23 +1,53 @@
 
-#include "sdk_project_config.h"
+#include "clocks_and_modes.h"
 #include <interrupt_manager.h>
 #include "pin_mux.h"
 #include "phy.h"
 #include "phy_tja110x.h"
 #include "enet_driver.h"
 
-volatile int exit_code = 0;
 
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
 #include <stdio.h>
 
-#include "S32K148.h" /* include peripheral declarations S32K148 */
-#include "clocks_and_modes.h"
-#include "LPUART.h"
+#include "sdk_project_config.h"
+#include "S32K148.h"
+
+
+void LPUART1_eth_sender(void);  // function to transmit Ether-Type
+
+#define EVB
+
+#ifdef EVB
+    #define GPIO_PORT   PTE
+    #define PCC_CLOCK   PCC_PORTE_CLOCK
+    #define LED1        21U
+    #define LED2        22U
+#else
+    #define GPIO_PORT   PTC
+    #define PCC_CLOCK   PCC_PORTC_CLOCK
+    #define LED1        0U
+    #define LED2        1U
+#endif
+
+volatile int exit_code = 0;
 
 char data=0;
+
+typedef struct {
+    uint8_t destAddr[6];
+    uint8_t srcAddr[6];
+    uint16_t etherType;
+    uint16_t length;
+    uint8_t payload[1500];
+} mac_frame_t;
+
+mac_frame_t frame;
+//mac_frame_t TxFrame;	// get one buffer on heap
+ mac_frame_t *RxFrame;	// buffer data comes from ENET driver
+ bool PhyLinkUp;
 
 void PORT_init (void) {
 PCC->PCCn[PCC_PORTC_INDEX ]|=PCC_PCCn_CGC_MASK; /* Enable clock for PORTC */
@@ -95,14 +125,8 @@ int main(void)
 	  	//RUNmode_80MHz(); /* Init clocks: 80 MHz SPLL & core, 40 MHz bus, 20 MHz flash */
 	  	NormalRUNmode_80MHz(); /* Init clocks: 80 MHz SPLL & core, 40 MHz bus, 20 MHz flash */
 	  	PORT_init(); /* Configure ports */
-	  	LPUART1_init(); /* Initialize LPUART @ 9600*/
-	  	LPUART1_transmit_string("  \n\r");
-	  	LPUART1_transmit_string("Running LPUART\n\r"); /* Transmit char string */
-	  	LPUART1_transmit_string("Tx_Rx_Bluetooth\n\r"); /* Transmit char string */
-	  	LPUART1_transmit_string("  \n\r");
 
 
 LPUART1_eth_sender(); //LPUART and Ether-Type
 
 }
-
