@@ -39,8 +39,8 @@ extern void app_eth_sender(void) { //function to transmit Ether-Type
 
     //to select delay
     LPUART1_transmit_string("Select the transmission delay: Slow or Fast\n\r "
-      "\n\r Press s: To send Slow  \n\r"
-      "\n\r Press f: To send Fast  \n\r");
+      "\n\r Press s: To send Slow: 7000ms  \n\r"
+      "\n\r Press f: To send Fast: 70ms  \n\r");
     LPUART1_transmit_string("  \n\r");
     uint8_t delay_select = (uint8_t)(LPUART1_receive_char());
 
@@ -51,9 +51,7 @@ extern void app_eth_sender(void) { //function to transmit Ether-Type
     LPUART1_transmit_string("  \n\r");
     LPUART1_transmit_string("Press 6 for  0x0806	Address Resolution Protocol (ARP) \n\r ");
     LPUART1_transmit_string("  \n\r");
-    //	for(;;)
-    //			{
-    PINS_DRV_Init(NUM_OF_CONFIGURED_PINS0, g_pin_mux_InitConfigArr0);
+    //	for(;;) {
 
     /* Turn off LED 1 and LED 2 */
     PINS_DRV_ClearPins(GPIO_PORT, (1 << LED1));
@@ -78,7 +76,7 @@ extern void app_eth_sender(void) { //function to transmit Ether-Type
       PINS_DRV_SetPins(LED0_PORT, 1 << LED0_PIN);
       PINS_DRV_ClearPins(LED1_PORT, 1 << LED1_PIN);
 
-      frame.etherType = 0x0008;
+      frame.etherType = 0x0008;   //0800-->0008
       for (i = 0; i < 64U; i++) {
         frame.payload[i] = i;
         //LPUART1_transmit_string("0800");
@@ -88,7 +86,7 @@ extern void app_eth_sender(void) { //function to transmit Ether-Type
       PINS_DRV_SetPins(LED0_PORT, 1 << LED1_PIN);
       PINS_DRV_ClearPins(LED1_PORT, 1 << LED0_PIN);
 
-      frame.etherType = 0xF022;
+      frame.etherType = 0xF022;  //
       for (i = 0; i < 64U; i++) {
         frame.payload[i] = i;
         //  LPUART1_transmit_string("22F0");
@@ -98,7 +96,7 @@ extern void app_eth_sender(void) { //function to transmit Ether-Type
       PINS_DRV_SetPins(LED0_PORT, 1 << LED1_PIN);
       PINS_DRV_ClearPins(LED1_PORT, 1 << LED0_PIN);
 
-      frame.etherType = 0x0608;
+      frame.etherType = 0x0608;  //
       for (i = 0; i < 64U; i++) {
         frame.payload[i] = i;
         // LPUART1_transmit_string("0806");
